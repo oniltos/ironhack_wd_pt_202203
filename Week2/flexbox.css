@@ -1,0 +1,219 @@
+/* Flex Container */
+
+.container {
+    display: flex | inline-flex
+    /* Altera apenas o modo que o CONTAINTER é exibido */
+}
+
+/** Flex Direction
+row (default): left to right in ltr; right to left in rtl
+row-reverse: right to left in ltr; left to right in rtl
+column: same as row but top to bottom
+column-reverse: same as row-reverse but bottom to top */
+.container {
+    flex-direction: row | row-reverse | column | column-reverse;
+    /* Estabelece o eixo principal. Colunas horizontais ou verticais */
+}
+
+/** Flex Wrap 
+nowrap (default): all flex items will be on one line
+wrap: flex items will wrap onto multiple lines, from top to bottom.
+wrap-reverse: flex items will wrap onto multiple lines from bottom to top. */
+.container {
+  flex-wrap: nowrap | wrap | wrap-reverse;
+}
+
+/** Flex flow - Shorthand para flex direction e flex wrap
+.container {
+  flex-flow: <‘flex-direction’> <‘flex-wrap’>;
+}
+
+/* example: */
+.container {
+    flex-flow: row wrap-reverse;
+  }
+
+/** Justify content 
+Define o alinhamento ao longo do eixo principal e ajuda a distribuir o espaço livre entre os items 
+flex-start (default): items are packed toward the start line
+flex-end: items are packed toward to end line
+center: items are centered along the line
+space-between: items are evenly distributed in the line; the first item is on the start line, last item on the end line
+space-around: items are evenly distributed in the line with equal space around them. Note that visually the spaces aren’t equal since all the items have equal space on both sides. The first item will have one unit of space against the container edge, but two units of space between the next item because that next item has its own spacing that applies.
+space-evenly: items are distributed so that the spacing between any two items (and the space to the edges) is equal.
+*/
+.container { justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly; }
+
+/* Align items
+Define como os itens se comportam ao longo do cros-axis
+This defines the default behavior for how flex items are laid out along the 
+cross axis on the current line. Think of it as the justify-content 
+version for the cross-axis (perpendicular to the main-axis).
+stretch (default): stretch to fill the container (still respect min-width/max-width)
+flex-start: cross-start margin edge of the items is placed on the cross-start line
+flex-end: cross-end margin edge of the items is placed on the cross-end line
+center: items are centered in the cross-axis
+baseline: items are aligned such as their baselines align
+*/
+.container {
+    align-items: flex-start | flex-end | center | baseline | stretch;
+  }
+
+
+/* Align content - Alinha as linhas do container quando há espaço no cross-axis. 
+O mesmo que o justify content faz no eixo principal 
+stretch (default): lines stretch to take up the remaining space
+flex-start: lines packed to the start of the container
+flex-end: lines packed to the end of the container
+center: lines packed to the center of the container
+space-between: lines evenly distributed; the first line is at the start of the container while the last one is at the end
+space-around: lines evenly distributed with equal space around each line
+*/
+.container {
+    align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+  }
+
+
+/**
+* FLEX ITEMS
+*/
+
+/* Order 
+Reordena os itens dentro de um container. Move o item de uma posição para outra */
+.item {
+  order: [integer]; /* default is 0 */
+}
+        .container :nth-child(1) { order: 2; }
+        .container :nth-child(2) { order: 3; }
+        .container :nth-child(3) { order: 1; }
+        .container :nth-child(4) { order: 3; }
+        .container :nth-child(5) { order: 1; }
+
+/** Flex grow e flex shrink
+brincar com a flexibilidade dos items. Faz o item crescer se necess[ario ou diminuir.  */
+
+/* Grow  cresce os items para preencher o container
+<h4>This is a Flex-Grow</h4>
+<h5>A,B,C and F are flex-grow:1 . D and E are flex-grow:2 .</h5>
+<div id="content">
+  <div class="box" style="background-color:red;">A</div>
+  <div class="box" style="background-color:lightblue;">B</div>
+  <div class="box" style="background-color:yellow;">C</div>
+  <div class="box1" style="background-color:brown;">D</div>
+  <div class="box1" style="background-color:lightgreen;">E</div>
+  <div class="box" style="background-color:brown;">F</div>
+</div>
+*/
+#content {
+  display: flex;
+
+  justify-content: space-around;
+  flex-flow: row wrap;
+  align-items: stretch;
+}
+
+.box {
+  flex-grow: 1;
+  border: 3px solid rgba(0,0,0,.2);
+}
+
+.box1 {
+  flex-grow: 2;
+  border: 3px solid rgba(0,0,0,.2);
+}
+
+/*Shrink - Diminui os items para encaixar no container
+
+<p>The width of content is 500px; the flex-basis of the flex items is 120px.</p>
+<p>A, B, C have flex-shrink:1 set. D and E have flex-shrink:2 set</p>
+<p>The width of D and E is less than the others.</p>
+<div id="content">
+  <div class="box" style="background-color:red;">A</div>
+  <div class="box" style="background-color:lightblue;">B</div>
+  <div class="box" style="background-color:yellow;">C</div>
+  <div class="box1" style="background-color:brown;">D</div>
+  <div class="box1" style="background-color:lightgreen;">E</div>
+</div>
+*/
+#content {
+    display: flex;
+    width: 500px;
+  }
+  
+  #content div {
+    flex-basis: 120px;
+    border: 3px solid rgba(0,0,0,.2);
+  }
+  
+  .box {
+    flex-shrink: 1;
+  }
+  
+  .box1 {
+    flex-shrink: 2;
+  }
+
+  /** Flex Basis **/
+  /* Define o tamanho default de um elemento antes da distribuição do espaço restante 
+  auto.   Means “look at my width or height property”.
+  content. Means size it based on the item’s content
+   (this keyword isn’t well supported yet, so it’s hard to test and 
+   harder to know what its brethren max-content, min-content, and fit-content do).
+  ou um tamanho 
+  If set to 0, the extra space around content isn’t factored in. If set to auto, the extra space is distributed based on its flex-grow value. (slide do grow)
+  */
+  .item {
+    flex-basis: [length] | auto; /* default auto */
+  }
+
+  /* Propriedade Flex
+ Shorthand para flex-grow, flex-shrink and flex-basis 
+ 
+ 
+ */
+ .item {
+    flex: none | [ < 'flex-grow' > < 'flex-shrink' >? || < 'flex-basis' > ];
+  }
+
+/** Align Self 
+Sobrescreve o alinhamento default em itens individuais
+This allows the default alignment (or the one specified by align-items) to be overridden for individual flex items.
+<section>
+  <div>Item #1</div>
+  <div>Item #2</div>
+  <div>Item #3</div>
+</section>
+**/
+
+.item {
+    align-self: auto | flex-start | flex-end | center | baseline | stretch;
+  }
+
+  section {
+    display: flex;
+    align-items: center;
+    height: 120px;
+    background: beige;
+  }
+  
+  div {
+    height: 60px;
+    background: cyan;
+    margin: 5px;
+  }
+  
+  div:nth-child(3) {
+    align-self: flex-end;
+    background: pink;
+  }
+
+
+  /** FLexbox froggy http://flexboxfroggy.com/ */
+
+
+
+
+
+
+
+

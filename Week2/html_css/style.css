@@ -1,0 +1,19 @@
+body {
+    background: black; 
+    color: white
+}
+p, span{
+    background: rgba(255, 255, 255, 0.5)
+}
+span{
+    background: orange
+}
+.fonte-azul {
+    color: blue
+}
+.background-marrom {
+    background: brown;
+}
+#especial {
+    color: green
+}
